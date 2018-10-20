@@ -15,6 +15,7 @@ class Group extends BaseController
     public function getList(Request $request)
     {
         $_group = DB::table('groups')
+            ->select(['groups.group_id', 'groups.group_name'])
             ->join('users_groups_ids', 'groups.group_id', '=', 'users_groups_ids.group_id')
             ->join('users', 'users_groups_ids.user_id', '=', 'users.user_id')
             ->where('users.user_id', $request->input('user_id'))
