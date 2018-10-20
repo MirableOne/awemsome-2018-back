@@ -8,12 +8,19 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Http\Request;
+
 class Group extends BaseController
 {
-    public function get()
+    public function getList(Request $request)
     {
-        return  response()
-            ->json(DB::table('users')->get()->toArray())
+        $_group = DB::table('groups')
+            ->join('users_groups_ids', 'groups.group_id', '=', 'users_groups_ids.group_id')
+            ->join('users', 'users_groups_ids.user_id', '=', 'users.user_id')
+            ->where('users.user_id', $request->input('user_id'))
+            ->get();
+
+        return response()->json($_group)
             ->header('Access-Control-Allow-Origin', '*')
             ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     }
