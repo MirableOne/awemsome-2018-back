@@ -20,6 +20,7 @@ class Auth extends BaseController
             return response()->json([
                 'user_id' => $_user->user_id,
                 'user_name' => $_user->nick,
+                'user_email' => $_user->email,
             ])
             ->header('Access-Control-Allow-Origin', '*')
             ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
