@@ -19,8 +19,27 @@ class Challenge extends BaseController
             ->get()
             ->toArray();
 
-        return  response()
+        return response()
             ->json($_challenge)
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    }
+
+    public function post(Request $request)
+    {
+        $_challengeId = DB::table('challange')
+            ->insertGetId([
+                'description' => $request->input('description'),
+                'title' => $request->input('title'),
+                'group_id' => $request->input('group_id'),
+                'author_id' => $request->input('author_id'),
+                'assignee_id' => $request->input('assignee_id')
+            ]);
+
+        return response()
+            ->json([
+                'challenge_id' => $_challengeId
+            ])
             ->header('Access-Control-Allow-Origin', '*')
             ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     }
