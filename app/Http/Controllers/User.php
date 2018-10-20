@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class User extends BaseController
 {
-    public function get(Request $request)
+    public function getList(Request $request)
     {
         $_group = DB::table('users')
             ->select(['users.user_id', 'users.nick'])
