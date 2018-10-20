@@ -14,7 +14,7 @@ class Challenge extends BaseController
 {
     public function getList(Request $request)
     {
-        $_challenge = DB::table('challenge')
+        $_challenge = DB::table('challange')
             ->where('group_id', $request->input('group_id'))
             ->get()
             ->toArray();
