@@ -8,6 +8,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Http\Request;
+
 class Challenge extends BaseController
 {
     public function getList(Request $request)
