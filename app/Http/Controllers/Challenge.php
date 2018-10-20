@@ -10,10 +10,15 @@ use Illuminate\Support\Facades\DB;
 
 class Challenge extends BaseController
 {
-    public function get()
+    public function getList(Request $request)
     {
+        $_challenge = DB::table('challenge')
+            ->where('group_id', $request->input('group_id'))
+            ->get()
+            ->toArray();
+
         return  response()
-            ->json(DB::table('users')->get()->toArray())
+            ->json($_challenge)
             ->header('Access-Control-Allow-Origin', '*')
             ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     }
